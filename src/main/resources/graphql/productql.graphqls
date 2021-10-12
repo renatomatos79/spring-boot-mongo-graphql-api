@@ -1,0 +1,16 @@
+type ProductQL {
+id: ID!,
+sku: String,
+name: String,
+price: String
+}
+
+type Query {
+getProducts(count: Int, sortBy: String):[ProductQL]
+getProduct(id: ID):ProductQL
+}
+
+type Mutation {
+createProduct(id: String!, sku: String!, name: String!, price: String!):ProductQL
+deleteProduct(id: String):ProductQL;
+}

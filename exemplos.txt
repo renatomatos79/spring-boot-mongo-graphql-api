@@ -1,0 +1,86 @@
+docker run -d  --hostname mongoserver -v c:\Temp:/temp -p 27017-27019:27017-27019  --name mongoserver2 mongo:4.0.4
+7b14c9184dd657612f5865a0ac510823d7c75127d0f01a90bfa78f2ffa58dd2f
+
+get http://localhost:9001/products
+del http://localhost:9001/products/615ce82a50c6f81ddc78eb39
+post http://localhost:9001/products
+{
+    "id": "2",
+    "sku": "01002",
+    "name": "product 2",
+    "price": 2.14
+}
+
+
+http://localhost:9001/graphiql
+
+{
+  __type(name: "ProductQL") {
+    name
+    kind
+    description
+    fields {
+      name
+    }
+  }
+}
+
+=>
+
+{
+  "data": {
+    "__type": {
+      "name": "ProductQL",
+      "kind": "OBJECT",
+      "description": "",
+      "fields": [
+        {
+          "name": "id"
+        },
+        {
+          "name": "sku"
+        },
+        {
+          "name": "name"
+        },
+        {
+          "name": "price"
+        }
+      ]
+    }
+  }
+}
+
+==============================
+
+query {
+    getProducts(count: 2) {
+        id
+        name
+    }
+}
+
+
+query {
+    getProduct(id: 1) {
+        id
+        name
+    }
+}
+
+
+mutation {
+  createProduct(id: "3", sku: "01003", name: "product 01003", price: "7.58") {
+    id 
+    name
+  }
+}
+
+mutation {
+  deleteProduct(id: "3") {
+    id 
+    name
+  }
+}
+
+
